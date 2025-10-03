@@ -13,7 +13,7 @@ PORT = os.environ.get("PORT", 8000)
 
 
 # Create an MCP server
-mcp = FastMCP("insurance-mcp", host="0.0.0.0", port=PORT)
+mcp = FastMCP(host="0.0.0.0", port=PORT)
 
 @mcp.tool()
 async def get_customers():
