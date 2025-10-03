@@ -1,0 +1,13 @@
+[project]
+name = "insurance-mcp"
+version = "0.1.0"
+description = "A FastMCP server with an echo tool"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "mcp[cli]",
+]
+
+[project.scripts]
+insurance-mcp = "main:mcp"
