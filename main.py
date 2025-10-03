@@ -5,7 +5,7 @@ from model import Customer, Policy
 from data import get_all_customers, get_customer_by_id, get_customers_by_state, get_all_policies, get_policy_by_id, get_policies_by_customer_id, init_database, init_sample_data, ensure_fresh_sample_data
 
 # Create an MCP server
-mcp = FastMCP("insurance-mcp")
+mcp = FastMCP("insurance-mcp", host="127.0.0.1", port=8000)
 
 @mcp.tool()
 async def get_customers():
