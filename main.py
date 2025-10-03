@@ -10,9 +10,10 @@ load_dotenv()
 
 
 PORT = os.environ.get("PORT", 8000)
+HOST = os.environ.get("HOST", "127.0.0.1")
 
 # Create an MCP server
-mcp = FastMCP("insurance-mcp", host="127.0.0.1", port=PORT)
+mcp = FastMCP("insurance-mcp", host=HOST, port=PORT)
 
 @mcp.tool()
 async def get_customers():
