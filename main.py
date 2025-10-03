@@ -41,4 +41,4 @@ async def startup():
 if __name__ == "__main__":
     import asyncio
     asyncio.run(startup())
-    mcp.run(transport="streamable-http")
+    mcp.run(transport="sse")
