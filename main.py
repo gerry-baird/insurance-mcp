@@ -38,6 +38,14 @@ async def get_customer_policies(customer_id: int):
     policies = await get_policies_by_customer_id(customer_id)
     return policies
 
+@mcp.tool(name="Get customer in state",
+          description="Retrieves customers in a specific state.")
+async def get_customers_in_state(state: str):
+    await ensure_fresh_sample_data()
+    customers = await get_customers_by_state(state)
+    return customers
+
+
 async def startup():
     """Initialize database on startup"""
     await init_database()
