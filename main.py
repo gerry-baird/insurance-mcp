@@ -45,6 +45,36 @@ async def get_customers_in_state(state: str):
     customers = await get_customers_by_state(state)
     return customers
 
+@mcp.tool(name="Calculate total customer premium",
+          description="Sums all the policy premiums of a customer.")
+async def get_customer_total_premium(customer_id: int):
+    await ensure_fresh_sample_data()
+    
+    customer = await get_customer_by_id(customer_id)
+    if customer is None:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    
+    policies = await get_policies_by_customer_id(customer_id)
+    total_premium = sum(policy.premium for policy in policies)
+    
+    return {"customer_id": customer_id, "total_premium": total_premium}
+
+@mcp.tool(name="Calculate days until policy end",
+          description="Calculate the number of days until the policy ends.")
+async def get_policy_days_to_end(policy_id: int):
+    await ensure_fresh_sample_data()
+
+    policy = await get_policy_by_id(policy_id)
+    if policy is None:
+        raise HTTPException(status_code=404, detail="Policy not found")
+
+    today = date.today()
+    days_to_end = (policy.end_date - today).days
+
+    return {
+        "policy_id": policy_id,
+        "days_to_end": days_to_end
+    }
 
 async def startup():
     """Initialize database on startup"""
